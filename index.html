@@ -1,0 +1,67 @@
+<html ng-app="weatherApp">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <title>Teste Front-END</title>
+  
+    <link href="libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+  
+    <script src="libraries/jquery/jquery.js"></script>
+    <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
+    <script src="libraries/chartjs/chartjs.js"></script>
+    <script src="libraries/angular/angular.js"></script>
+    <script src="data/data.js"></script>
+    <script src="app/app.js"></script>
+
+  </head>
+
+  <body ng-controller="WeatherController" 
+        data-ng-init="init()" 
+        ng-cloak>
+    
+    <h3>Previsão do Tempo</h3>
+    <hr>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div>
+          <div class="col-md-2">
+            <h5>Selecione uma cidade: </h5>
+          </div>
+          <div class="col-md-8">
+            <select ng-options="name for name in cities" 
+                    ng-model="current" 
+                    ng-change="update(name)" 
+                    class="form-control">
+            </select>
+          </div>    
+        </div>
+      </div>
+      <div class="row weather-content" ng-show="selection !== undefined">
+        <div class="col-md-4 panel panel-default">
+          <div class="panel-body info-panel">
+            <p><span class="glyphicon glyphicon-triangle-top"></span> Máxima de: {{selection.max}} °C</p>
+            <p><span class="glyphicon glyphicon-triangle-bottom"></span> Mínima de: {{selection.min}} °C</p>
+          </div>
+        </div>
+        <div class="col-md-4 panel panel-default">
+          <div class="panel-body info-panel">
+            <p ng-if="selection.weekendAverage > 25">Praia: <span class="glyphicon glyphicon-sunglasses"></span></p>
+            <p ng-if="selection.weekendAverage <= 25">Frio: <span class="glyphicon glyphicon-asterisk"></span></p>
+          </div>  
+        </div>
+        <div class="col-md-4 panel panel-default">
+          <div class="panel-body info-panel">
+            <canvas id="weatherChart" ng-render="drawChart()"></canvas>
+          </div>
+        </div>
+      </div>    
+    </div>
+
+  </body>
+
+</html>

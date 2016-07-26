@@ -1,0 +1,19 @@
+body
+{
+	margin: 3em;
+}
+
+.weather-content
+{
+	margin-top: 2em;
+}
+
+.info-panel
+{
+	height: 200px;
+}
+
+#weatherChart
+{
+	width: 100%;
+}
